@@ -5,6 +5,8 @@
  */
 package day1;
 
+import java.util.Scanner;
+
 /**
  *
  * @author User
@@ -15,7 +17,33 @@ public class Day1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        System.out.println("Hello world!"); // ar enter
+        System.out.print("Hello world!"); //bez enter
+        
+        //mainigo tipi, tie pasi, kas C#
+        
+        Scanner sc = new Scanner(System.in);
+        System.out.println("ievadiet tekstu!");
+        String text = sc.nextLine(); // ievade konsole
+        
+        System.out.println("ievadiet skaitli!");
+        int number = sc.nextInt(); //ievadam skaitli
+        
+       
+        System.out.println(text); // izvade
+        
+        if(!text.equals("vii")){
+            // vai nav vienads
+        }
+        
+        if(number == 3){
+            //if piemers
+        }else{
+            
+        }
+        
+        
     }
     
 }
