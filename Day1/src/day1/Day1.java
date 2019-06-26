@@ -17,7 +17,35 @@ public class Day1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        sum(2,3);
+        // metodi, kurai padod ieksa 3 parametrus - 
+        // 2 int tipa skaitli
+        // strings
+        //ievada skaitlus, plusu vai minusu un tad izpildam darbibu
+       
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter either - or + in order to perform the action.");
+        String action = sc.nextLine(); 
         
+        System.out.println("Enter a number: ");
+        int number = sc.nextInt();
+        
+        System.out.println("Enter another number: ");
+        int number2 = sc.nextInt();
+        
+        
+        
+        calculation(action, number, number2);
+        
+       
+        
+    }
+    
+    private static void sum(int a, int b){
+        System.out.println(a+b);
+    }
+    
+    private static void example(){
         System.out.println("Hello world!"); // ar enter
         System.out.print("Hello world!"); //bez enter
         
@@ -42,8 +70,19 @@ public class Day1 {
         }else{
             
         }
-        
-        
     }
     
+    private static void calculation(String c, int a, int b){
+        if(c.equals("-"))
+        {
+            int sub = a-b;
+            System.out.println(sub);
+        }
+        else if(c.equals("+"))
+        {
+            int add = a+b;
+            System.out.println(add);
+        }
+        
+    }
 }
