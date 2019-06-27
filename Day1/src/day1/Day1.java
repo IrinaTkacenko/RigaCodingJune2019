@@ -32,8 +32,7 @@ public class Day1 {
         
         System.out.println("Enter another number: ");
         int number2 = sc.nextInt();
-        
-        
+       
         
         calculation(action, number, number2);
         
@@ -82,6 +81,9 @@ public class Day1 {
         {
             int add = a+b;
             System.out.println(add);
+        }else
+        {
+            System.out.println("Entered simbol is incorrect!");
         }
         
     }
