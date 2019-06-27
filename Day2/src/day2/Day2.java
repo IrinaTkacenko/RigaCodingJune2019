@@ -20,11 +20,24 @@ public class Day2 {
         // TODO code application logic here
         
       Scanner sc = new Scanner(System.in);
-      System.out.println("Please enter a number:");
-      int number = sc.nextInt();
-      System.out.println(TheNumber(number));
+//      System.out.println("Please enter a number:");
+//      int number = sc.nextInt();
+//      System.out.println(TheNumber(number));
       
-     
+      System.out.println("Please enter a word:");
+      String userInput = sc.nextLine();
+      System.out.println(TheWord(userInput));
+      
+    }
+    
+    private static String TheWord(String word){
+        String c ="*";
+        if(word.length() > 5){
+            return c;
+        }else {
+            return c+"*";
+        }
+
     }
     
     private static String TheNumber(int value){
