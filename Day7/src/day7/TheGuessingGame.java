@@ -19,7 +19,9 @@ public class TheGuessingGame extends javax.swing.JFrame {
     // false - player1( sets the word to guess)
     // true - player2( guesses the word)
     private int chances;
-    private ArrayList<Character> wordToGuessList = new ArrayList<Character>();
+//    private ArrayList<Character> wordToGuessList = new ArrayList<Character>();
+//    private ArrayList<Character> guessList = new ArrayList<Character>();
+//    private ArrayList<Character> guessedLettersList = new ArrayList<Character>();
     
     /**
      * Creates new form TheGuessingGame
@@ -43,6 +45,7 @@ public class TheGuessingGame extends javax.swing.JFrame {
         lblChances = new javax.swing.JLabel();
         lblOutput = new javax.swing.JLabel();
         lblChancesLeft = new javax.swing.JLabel();
+        lblPS = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,31 +63,38 @@ public class TheGuessingGame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblChancesLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(lblChances, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(tfInput, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblPS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblOutput, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblChancesLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37)
+                                .addComponent(lblChances, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfInput, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 467, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(lblOutput)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addComponent(lblOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblPS, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnSubmit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblChances, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblChancesLeft, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                    .addComponent(lblChancesLeft, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41))
         );
 
         pack();
@@ -108,7 +118,32 @@ public class TheGuessingGame extends javax.swing.JFrame {
                 tfInput.setText("");
                 lblChancesLeft.setText("");
             }else{
-                lblOutput.setText("Wrong guess! Try again!");
+                ArrayList<Character> wordToGuessList = new ArrayList<Character>();
+                for(int i = 0; i < wordToGuess.length(); i++){
+                wordToGuessList.add(wordToGuess.charAt(i)); 
+                }
+                ArrayList<Character> guessList = new ArrayList<Character>();
+                for(int i = 0; i < guess.length(); i++){
+                guessList.add(guess.charAt(i));
+                }
+                ArrayList<Character> guessedLettersList = new ArrayList<Character>();
+                for(int i = 0; i < wordToGuessList.size(); i++){
+                    for(int j = 0; j < guessList.size(); j++){
+                        if(wordToGuessList.get(i).equals(guessList.get(j))){
+                        guessedLettersList.add(wordToGuessList.get(i));
+                        break;
+                        }
+                    }
+                }
+//                System.out.println(wordToGuessList);
+//                System.out.println(guessList);
+//                System.out.println(guessedLettersList);
+                lblOutput.setText("Wrong guess! The word you entered contains letters \n"
+                        + "that the word you are guessing also contains. \n" 
+                        + " These are the letters: " + guessedLettersList);
+                lblPS.setText("P.S. Letters are ordered the way they stand in the word you're guessing \n"
+                        + " and if a letter repeats this means it repeats in the word you're guessing.\n"
+                        + " Try again!");
                 tfInput.setText("");
                 chances--;
                 lblChances.setText(String.valueOf(chances));
@@ -127,27 +162,25 @@ public class TheGuessingGame extends javax.swing.JFrame {
             lblChances.setText(String.valueOf(chances));
         }
         
-        ArrayList<Character> wordToGuessList = new ArrayList<Character>();
-        for(int i = 0; i < wordToGuess.length(); i++){
-            wordToGuessList.add(wordToGuess.charAt(i)); 
-        }
-        
-        ArrayList<Character> guessList = new ArrayList<Character>();
-        for(int i = 0; i < guess.length(); i++){
-            guessList.add(guess.charAt(i));
-        }
-        
-        ArrayList<Character> guessedLettersList = new ArrayList<Character>();
-       
-        for(int i = 0; i < wordToGuessList.size(); i++){
-            for(int j = 0; j < guessList.size(); j++){
-                if(wordToGuessList.get(i).equals(guessList.get(j))){
-                    guessedLettersList.add(wordToGuessList.get(i));
-                    break;
-                }
-            }
-        }
-        
+//       XXX
+//        for(int i = 0; i < guessList.size(); i++){
+//            for(int j = 0; j < wordToGuessList.size(); j++){
+//                if(guessList.get(i).equals(wordToGuessList.get(j))){
+//                   guessedLettersList.add(guessList.get(i));
+//                   break;
+//                }
+//            }
+//        }
+//          *****
+//        for(int i = 0; i < wordToGuessList.size(); i++){
+//            for(int j = 0; j < guessList.size(); j++){
+//                if(wordToGuessList.get(i).equals(guessList.get(j))){
+//                    guessedLettersList.add(wordToGuessList.get(i));
+//                    break;
+//                }
+//            }
+//        }
+
 //        guessedLettersList = wordToGuessList;
 //        for(int i = 0; i < guessedLettersList .size(); i++){
 //            for(int j = 0; j < guessList.size(); j++){
@@ -156,9 +189,7 @@ public class TheGuessingGame extends javax.swing.JFrame {
 //                }
 //            }
 //        }
-       
 
-        
 //        for(int i = 0; i < wordToGuess.length(); i++){
 //            for(int  j = 0; j < guess.length(); j++){
 //                
@@ -169,9 +200,9 @@ public class TheGuessingGame extends javax.swing.JFrame {
 //            }
 //        }
         
-        System.out.println(wordToGuessList);
-        System.out.println(guessList);
-        System.out.println(guessedLettersList);
+//        System.out.println(wordToGuessList);
+//        System.out.println(guessList);
+//        System.out.println(guessedLettersList);
         //System.out.println(Character.isLetter(InputValue.charAt(i)));
 
     }//GEN-LAST:event_btnSubmitActionPerformed
@@ -216,6 +247,7 @@ public class TheGuessingGame extends javax.swing.JFrame {
     private javax.swing.JLabel lblChances;
     private javax.swing.JLabel lblChancesLeft;
     private javax.swing.JLabel lblOutput;
+    private javax.swing.JLabel lblPS;
     private javax.swing.JTextField tfInput;
     // End of variables declaration//GEN-END:variables
 }
