@@ -63,12 +63,10 @@ public class TheGuessingGame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblPS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblOutput, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -77,16 +75,18 @@ public class TheGuessingGame extends javax.swing.JFrame {
                                 .addGap(37, 37, 37)
                                 .addComponent(lblChances, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(tfInput, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 467, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(lblOutput, javax.swing.GroupLayout.DEFAULT_SIZE, 783, Short.MAX_VALUE)
+                    .addComponent(lblPS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
-                .addComponent(lblOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblPS, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblPS, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -94,7 +94,7 @@ public class TheGuessingGame extends javax.swing.JFrame {
                     .addComponent(btnSubmit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblChances, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblChancesLeft, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41))
+                .addGap(85, 85, 85))
         );
 
         pack();
@@ -103,13 +103,35 @@ public class TheGuessingGame extends javax.swing.JFrame {
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
         
+//        for(int k = 0; k < wordToGuess.length(); k++){
+//            try{
+//                Character.isLetter(wordToGuess.charAt(k));
+//            }catch(Exception ex){
+//                lblOutput.setText("Cannot contain digits, symbols or be empty");
+//            }
+//        }
+        
         if(whosTurnToPlay == false){
+//            lblOutput.setText("");
+//            CheckingInputsClass check = new CheckingInputsClass();
+//            check.CheckingInputs(tfInput.getText(),lblOutput.getText());
             wordToGuess = tfInput.getText();
             tfInput.setText("");
             whosTurnToPlay = true;
+            for(int k = 0; k < wordToGuess.length(); k++){
+                try{
+                    Character.isLetter(wordToGuess.charAt(k));
+                    
+                }catch(Exception ex){
+                    lblOutput.setText("Cannot contain digits, symbols or be empty");
+                    whosTurnToPlay = false;
+                    break;
+                }
+            }
             chances = 5;
             lblChancesLeft.setText("Chances left");
             lblOutput.setText("Word accepted! Player 2, guess the word!");
+            lblPS.setText("");
         }else{
             guess = tfInput.getText();
             if(guess.equals(wordToGuess)){
@@ -117,33 +139,33 @@ public class TheGuessingGame extends javax.swing.JFrame {
                 lblOutput.setText("Bingo! Player 1,please type in a word in the window below.");
                 tfInput.setText("");
                 lblChancesLeft.setText("");
+                lblPS.setText("");
             }else{
                 ArrayList<Character> wordToGuessList = new ArrayList<Character>();
                 for(int i = 0; i < wordToGuess.length(); i++){
-                wordToGuessList.add(wordToGuess.charAt(i)); 
+                    wordToGuessList.add(wordToGuess.charAt(i)); 
                 }
                 ArrayList<Character> guessList = new ArrayList<Character>();
                 for(int i = 0; i < guess.length(); i++){
-                guessList.add(guess.charAt(i));
+                    guessList.add(guess.charAt(i));
                 }
                 ArrayList<Character> guessedLettersList = new ArrayList<Character>();
                 for(int i = 0; i < wordToGuessList.size(); i++){
                     for(int j = 0; j < guessList.size(); j++){
-                        if(wordToGuessList.get(i).equals(guessList.get(j))){
-                        guessedLettersList.add(wordToGuessList.get(i));
-                        break;
-                        }
+                        if(wordToGuessList.get(i).equals(guessList.get(j)) 
+//                           && !guessedLettersList.contains(wordToGuessList.get(i))
+                            ){
+                            guessedLettersList.add(wordToGuessList.get(i));
+                            break;
+                        }   
                     }
                 }
-//                System.out.println(wordToGuessList);
-//                System.out.println(guessList);
-//                System.out.println(guessedLettersList);
                 lblOutput.setText("Wrong guess! The word you entered contains letters \n"
-                        + "that the word you are guessing also contains. \n" 
-                        + " These are the letters: " + guessedLettersList);
+                                   + "that the word you are guessing also contains. \n" 
+                                   + " These are the letters: " + guessedLettersList);
                 lblPS.setText("P.S. Letters are ordered the way they stand in the word you're guessing \n"
-                        + " and if a letter repeats this means it repeats in the word you're guessing.\n"
-                        + " Try again!");
+                                   + " and if a letter repeats this means it repeats in the word you're guessing.\n"
+                                   + " Try again!");
                 tfInput.setText("");
                 chances--;
                 lblChances.setText(String.valueOf(chances));
@@ -152,6 +174,7 @@ public class TheGuessingGame extends javax.swing.JFrame {
                     lblOutput.setText("Game over!"
                             + "Player 1,please type in a word in the window below.");
                     lblChancesLeft.setText("");
+                    lblPS.setText("");
                 }
             }
         }
@@ -162,7 +185,21 @@ public class TheGuessingGame extends javax.swing.JFrame {
             lblChances.setText(String.valueOf(chances));
         }
         
-//       XXX
+//        for( int k = 0; k < tfInput.getText().length(); k++){
+//            if(!Character.isLetter(tfInput.getText().charAt(k))
+//                        || tfInput.getText().equals("")){
+//                lblOutput.setText("The word cannot contain digits or symbols"
+//                            + " or cannot be empty!"
+//                            + "Please type in a word in the window below.");
+//                tfInput.setText("");
+//                break;
+//            }else {
+//
+//            }
+//        }
+           
+        
+//       XXX 
 //        for(int i = 0; i < guessList.size(); i++){
 //            for(int j = 0; j < wordToGuessList.size(); j++){
 //                if(guessList.get(i).equals(wordToGuessList.get(j))){
@@ -195,6 +232,7 @@ public class TheGuessingGame extends javax.swing.JFrame {
 //                
 //                if(!guess.charAt(j).equals(wordToGuess.charAt(i))){
 //                    
+//                    
 //                } else {
 //                }
 //            }
@@ -203,10 +241,10 @@ public class TheGuessingGame extends javax.swing.JFrame {
 //        System.out.println(wordToGuessList);
 //        System.out.println(guessList);
 //        System.out.println(guessedLettersList);
-        //System.out.println(Character.isLetter(InputValue.charAt(i)));
 
     }//GEN-LAST:event_btnSubmitActionPerformed
 
+   
     /**
      * @param args the command line arguments
      */
@@ -250,4 +288,18 @@ public class TheGuessingGame extends javax.swing.JFrame {
     private javax.swing.JLabel lblPS;
     private javax.swing.JTextField tfInput;
     // End of variables declaration//GEN-END:variables
+
+    private static class CheckingInputsClass {
+
+        public void CheckingInputs(String _tfInput, String _lblOutput){
+         for( int k = 0; k < _tfInput.length(); k++){
+                try{
+                    Character.isLetter(_tfInput.charAt(k));
+                    
+                }catch(Exception ex){
+                   _lblOutput = "Cannot contain digits, symbols or be empty";
+                }
+            }
+        }
+    }
 }
